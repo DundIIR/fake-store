@@ -1,0 +1,5 @@
+services:
+  frontend:
+    image: ruzinde/fake-store:2.0
+    ports:
+      - 9050:5173
