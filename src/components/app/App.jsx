@@ -1,10 +1,12 @@
-import Header from '../Header/Header'
-import Filters from '../Filters/Filters'
-import ProductList from '../CardList/CardList'
+// import Filters from '../Filters/Filters'
+// import ProductList from '../CardList/CardList'
+
 import './_app.scss'
+import Logo from '../../resources/img/logo.svg'
+import Header from '../Header/Header'
 
 function App() {
-	return <div className="app"></div>
+	return <Header></Header>
 }
 
 export default App

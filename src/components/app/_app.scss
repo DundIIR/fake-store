@@ -1,0 +1,9 @@
+.form {
+	&__input {
+		color: black;
+
+		&::placeholder {
+			color: inherit;
+		}
+	}
+}

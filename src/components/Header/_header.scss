@@ -1,0 +1,141 @@
+@import '../../style/vars';
+
+.header {
+	margin-top: 13px;
+	padding: 3px 60px;
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 1160px;
+		height: 193px;
+		top: 27px;
+		left: 0;
+		background-color: $brand;
+		z-index: -1;
+	}
+
+	&__logo {
+		width: 193px;
+		height: 45px;
+		margin-bottom: 30px;
+	}
+
+	&__line {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&:not(:last-child) {
+			margin-bottom: 30px;
+		}
+	}
+
+	&__links {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+
+		a {
+			@include font-subtitle;
+		}
+	}
+}
+
+.form {
+	border: 2px solid #000;
+	border-radius: 50px;
+
+	&__input {
+		@include font-base;
+
+		width: 360px;
+		padding: 9px 10px 9px 48px;
+		border: none;
+		background-color: transparent;
+		border-radius: 50px 0 0 50px;
+		background: url('../../resources/img/search.svg') no-repeat 16px center;
+	}
+
+	&__btn {
+		@include font-base;
+		width: 160px;
+		padding: 9px 0;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		border-left: 2px solid #000;
+		border-radius: 0 50px 50px 0;
+	}
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 60px;
+
+	&__link {
+		font-size: 18px;
+		line-height: 30px;
+
+		&:not(:last-child) {
+			padding-left: 25px;
+
+			background-repeat: no-repeat;
+			background-position: 0 6px;
+		}
+
+		&--basket {
+			position: relative;
+			background-image: url('../../resources/img/basket.svg');
+		}
+
+		&--favorite {
+			background-image: url('../../resources/img/favorite.svg');
+		}
+	}
+
+	&__count {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 4px;
+		left: -13px;
+		width: 21px;
+		height: 21px;
+		border-radius: 50%;
+		background-color: white;
+		font-size: 15px;
+		line-height: 16px;
+	}
+}
+
+.sorting {
+	&__label {
+		@include font-subtitle;
+		font-size: 16px;
+		margin-right: 30px;
+	}
+
+	.sorting__select {
+		@include font-base;
+
+		background-color: transparent;
+		width: 295px;
+		padding: 9px 20px;
+		border-radius: 50px;
+		border: 2px solid #000;
+		cursor: pointer;
+
+		background: url('../../resources/img/arrow-down.svg') no-repeat 260px center;
+	}
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}

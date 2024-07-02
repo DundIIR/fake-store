@@ -1,0 +1,20 @@
+// colors
+$brand: #ffe17f;
+$text: black;
+
+@mixin font-base {
+	font-family: 'Rubik', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	color: $text;
+}
+
+@mixin font-subtitle {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 800;
+	font-size: 18px;
+	line-height: 21px;
+	letter-spacing: 3.5px;
+	color: $text;
+}

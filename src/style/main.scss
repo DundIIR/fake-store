@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import './vars';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+
+body {
+	@include font-base;
+}
+
+.container {
+	width: 1160px;
+	margin: 0 auto;
+}
+
+.visually-hidden {
+	position: absolute;
+
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+ul,
+li,
+dl {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+	&:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
