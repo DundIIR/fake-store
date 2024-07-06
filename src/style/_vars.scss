@@ -1,6 +1,7 @@
 // colors
 $brand: #ffe17f;
 $text: black;
+$background: #f0f0f0;
 
 @mixin font-base {
 	font-family: 'Rubik', sans-serif;
@@ -10,11 +11,29 @@ $text: black;
 	color: $text;
 }
 
-@mixin font-subtitle {
+@mixin font-title {
 	font-family: 'Raleway', sans-serif;
-	font-weight: 800;
+	font-style: normal;
+	font-optical-sizing: auto;
+	font-weight: 900;
 	font-size: 18px;
 	line-height: 21px;
-	letter-spacing: 3.5px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
 	color: $text;
+}
+
+@mixin font-subtitle {
+	font-family: 'Rubik', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 20px;
+	color: $text;
+}
+
+@mixin font-currency {
+	font-family: 'Saira Semi Condensed', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 20px;
 }

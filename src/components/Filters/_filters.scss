@@ -1,0 +1,60 @@
+@import '../../style/vars';
+
+.filters {
+	padding: 0 60px;
+	width: 320px;
+
+	&__title {
+		@include font-title;
+		font-size: 16px;
+		padding: 25px 0;
+	}
+
+	&__section {
+		padding-top: 12px;
+		border-top: 2px solid black;
+		margin-bottom: 20px;
+	}
+
+	&__subtitle {
+		@include font-subtitle;
+		margin-bottom: 20px;
+	}
+
+	&__input {
+		@include font-base;
+		padding-left: 30px;
+		appearance: none;
+		cursor: pointer;
+
+		&[type='checkbox']:checked + .control-mark {
+			border-color: black;
+			background: url('../../resources/img/check.svg') no-repeat center center;
+		}
+	}
+
+	&__categories {
+		max-height: 300px;
+		overflow-y: auto;
+	}
+
+	.control-mark {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		left: 0;
+		top: 50%;
+		border: 2px solid #cccccc;
+		border-radius: 3px;
+		transform: translateY(-50%);
+	}
+
+	&__item {
+		margin-bottom: 18px;
+		position: relative;
+
+		& label {
+			cursor: pointer;
+		}
+	}
+}

@@ -1,0 +1,40 @@
+@import '../../style/vars';
+
+.custom-range-slider {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding-bottom: 35px;
+
+	input[type='range'] {
+		width: 100%;
+
+		appearance: none;
+		background: transparent;
+		cursor: pointer;
+
+		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			background-color: $background;
+			border: 2px solid black;
+			border-radius: 50%;
+			height: 18px;
+			width: 18px;
+			transform: translateY(-45%);
+		}
+
+		&::-webkit-slider-runnable-track {
+			height: 2px;
+			background: #dcdcdc;
+		}
+	}
+
+	.bubble {
+		@include font-base;
+		position: absolute;
+		bottom: 0;
+		padding: 2px 5px;
+		transform: translateX(-50%);
+	}
+}

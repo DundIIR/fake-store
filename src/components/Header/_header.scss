@@ -1,6 +1,7 @@
 @import '../../style/vars';
 
 .header {
+	z-index: 2;
 	margin-top: 13px;
 	padding: 3px 60px;
 	position: relative;
@@ -9,10 +10,11 @@
 		content: '';
 		position: absolute;
 		width: 1160px;
-		height: 193px;
+		height: 192px;
 		top: 27px;
 		left: 0;
 		background-color: $brand;
+		border-radius: 20px;
 		z-index: -1;
 	}
 
@@ -26,9 +28,10 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-bottom: 30px;
 
-		&:not(:last-child) {
-			margin-bottom: 30px;
+		&:last-child {
+			margin-bottom: 20px;
 		}
 	}
 
@@ -39,7 +42,7 @@
 		gap: 20px;
 
 		a {
-			@include font-subtitle;
+			@include font-title;
 		}
 	}
 }
@@ -57,6 +60,10 @@
 		background-color: transparent;
 		border-radius: 50px 0 0 50px;
 		background: url('../../resources/img/search.svg') no-repeat 16px center;
+
+		&::placeholder {
+			color: black;
+		}
 	}
 
 	&__btn {
@@ -115,7 +122,7 @@
 
 .sorting {
 	&__label {
-		@include font-subtitle;
+		@include font-title;
 		font-size: 16px;
 		margin-right: 30px;
 	}

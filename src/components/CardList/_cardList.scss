@@ -1,0 +1,28 @@
+@import '../../style/vars';
+
+.card-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 40px;
+	padding: 40px;
+	background-color: white;
+	border-radius: 20px 20px 0 0;
+
+	&--horizontal {
+		grid-template-columns: 1fr;
+	}
+
+	&__load-more {
+		@include font-title;
+		font-size: 16px;
+		grid-column: 1 / -1;
+		width: 100%;
+		padding: 18px 20px;
+		cursor: pointer;
+		text-align: center;
+		background-color: transparent;
+		border: 3px solid #e5e5e5;
+		color: #666666;
+		border-radius: 10px;
+	}
+}

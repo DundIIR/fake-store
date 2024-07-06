@@ -1,0 +1,116 @@
+@import '../../style/vars';
+
+.block-image {
+	position: relative;
+	height: 295px;
+	padding: 23px 31.5px 50px;
+	border: 3px solid $background;
+	border-radius: 20px;
+}
+
+.block-button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.favorite-active .block-image {
+	border-color: $brand;
+}
+
+.card:hover.favorite-active .block-image::after {
+	background-image: url('../../resources/img/favorite-active.svg');
+}
+
+.card {
+	width: 100%;
+	overflow: hidden;
+
+	&:hover {
+		position: relative;
+		transform: scale(1.02);
+
+		.block-image::after {
+			position: absolute;
+			content: '';
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+			top: 15px;
+			right: 15px;
+			background: url('../../resources/img/favorite.svg') no-repeat;
+			background-size: 20px 20px;
+		}
+	}
+
+	&:hover &__image {
+		transform: scale(1.08);
+	}
+
+	&__image {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	&__info {
+		padding: 10px 15px;
+	}
+
+	&__category {
+		position: absolute;
+		font-size: 14px;
+		color: #444444;
+		bottom: 14px;
+		left: 50%;
+		text-align: center;
+		transform: translateX(-50%);
+		white-space: nowrap;
+	}
+
+	&__name {
+		@include font-subtitle;
+		font-size: 18px;
+		letter-spacing: -0.5px;
+		margin-bottom: 10px;
+	}
+
+	&__rating {
+		font-size: 18px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 3px;
+	}
+
+	&__btn {
+		@include font-base;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 20px;
+		width: 135px;
+		padding: 10px;
+		cursor: pointer;
+		border-radius: 10px;
+		border: none;
+		background-color: $brand;
+	}
+
+	&__currency {
+		@include font-currency;
+		position: relative;
+		padding-right: 26px;
+
+		&::after {
+			position: absolute;
+			content: '';
+			width: 20px;
+			height: 20px;
+			top: 50%;
+			right: 0;
+			transform: translateY(-50%);
+			background: url('../../resources/img/basket.svg') no-repeat center center;
+		}
+	}
+}
