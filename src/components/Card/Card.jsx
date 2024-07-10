@@ -4,14 +4,14 @@ const Card = ({ product, layout, favorite }) => {
 	return (
 		<div className={`card ${layout === 'horizontal' ? 'card--horizontal' : ''} ${favorite ? 'favorite-active' : ''}`}>
 			<div className="block-image">
-				<img src={product.image} alt={product.name} className="card__image" />
+				<img src={product.image} alt={product.title} className="card__image" />
 				<p className="card__category">{product.category}</p>
 			</div>
 			<div className="card__info">
-				<p className="card__name">{product.name}</p>
+				<p className="card__name">{product.title}</p>
 				<div className="block-button">
 					<p className="card__rating">
-						{product.rating}{' '}
+						{product.rating.rate}{' '}
 						<span>
 							<svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path

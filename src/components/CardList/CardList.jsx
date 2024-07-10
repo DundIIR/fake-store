@@ -1,58 +1,69 @@
-import Card from '../Card/Card'
 import './_cardList.scss'
-import image1 from '../../resources/img/image1.png'
-import image2 from '../../resources/img/image2.png'
+import Card from '../Card/Card'
+import { useState, useEffect } from 'react'
+
+import { getProducts } from '../../services/fake-api-store'
+import CardListSkeleton from '../Skeleton/CardListSkeleton'
+import { useToast } from '@chakra-ui/react'
 
 const CardList = ({ layout }) => {
-	const products = [
-		{
-			id: 1,
-			category: "men's clothing",
-			name: 'Fjallraven - Foldsack No. 1 Backpack, Fits 1...',
-			rating: 3.9,
-			price: 7.95,
-			image: image1,
-		},
-		{
-			id: 2,
-			category: "men's clothing",
-			name: 'Mens Casual Premium Slim Fit T-Shirts',
-			rating: 4.3,
-			price: 22.3,
-			image: image2,
-		},
-		{
-			id: 3,
-			category: "women's clothing",
-			name: "Opna Women's Short Sleeve Moisture",
-			rating: 4.5,
-			price: 137.95,
-			image: image1,
-			favorite: true,
-		},
-		{
-			id: 4,
-			category: "women's clothing",
-			name: "Opna Women's Short Sleeve Moisture",
-			rating: 4.5,
-			price: 137.95,
-			image: image1,
-		},
-		{
-			id: 5,
-			category: "women's clothing",
-			name: "Opna Women's Short Sleeve Moisture",
-			rating: 4.5,
-			price: 137.95,
-			image: image1,
-		},
-	]
+	const [products, setProducts] = useState([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState()
+	const [offset, setOffset] = useState(0)
+	const [endProduct, setEndProduct] = useState(false)
+	const toast = useToast()
+
+	const PRODUCTS_PER_PAGE = 9
+
+	const loadProducts = async () => {
+		try {
+			const newProducts = await getProducts(offset + PRODUCTS_PER_PAGE, offset)
+			if (newProducts.length < PRODUCTS_PER_PAGE) {
+				setEndProduct(true)
+			}
+			setProducts(prevProducts => [...prevProducts, ...newProducts])
+			setLoading(false)
+			setError(null)
+			setOffset(offset => offset + PRODUCTS_PER_PAGE)
+		} catch (err) {
+			setError(err)
+			setLoading(true)
+		}
+	}
+
+	useEffect(() => {
+		loadProducts()
+	}, [])
+
+	useEffect(() => {
+		error
+			? toast({
+					title: 'Упс... Проблема',
+					description: 'Попробуйте зайти попозже, проблема уже решается',
+					status: 'error',
+					duration: 9000,
+					isClosable: true,
+			  })
+			: null
+	}, [error])
+
 	return (
 		<div className={`card-list ${layout === 'horizontal' ? 'card-list--horizontal' : ''}`}>
-			{products.map(product => (
-				<Card key={product.id} product={product} favorite={product.favorite} layout={layout} />
-			))}
-			<button className="card-list__load-more">Загрузить ещё</button>
+			{loading ? (
+				<CardListSkeleton />
+			) : (
+				<>
+					{products.map(product => (
+						<Card key={product.id} product={product} />
+					))}
+					{!endProduct && (
+						<button className="card-list__load-more" onClick={loadProducts}>
+							Загрузить ещё
+						</button>
+					)}
+				</>
+			)}
 		</div>
 	)
 }
