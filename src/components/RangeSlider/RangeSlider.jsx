@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './_rangeSlider.scss'
 
-const RangeSlider = ({ min = 0, max = 20, inValue = 0 }) => {
+const RangeSlider = ({ min = 0, max = 20, inValue = 0, onChange }) => {
 	const [value, setValue] = useState(inValue)
 	const rangeInputRef = useRef(null)
 	const thumbWidth = 6
@@ -24,6 +24,7 @@ const RangeSlider = ({ min = 0, max = 20, inValue = 0 }) => {
 
 	const handleInput = e => {
 		setValue(e.target.value)
+		onChange(e.target.value)
 	}
 
 	return (

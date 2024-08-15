@@ -6,12 +6,23 @@
 	padding: 23px 31.5px 50px;
 	border: 3px solid $background;
 	border-radius: 20px;
+
+	&--basket {
+		width: 225px;
+		padding: 30px;
+		display: block;
+	}
 }
 
 .block-button {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	&--basket {
+		justify-content: flex-start;
+		gap: 14px;
+	}
 }
 
 .favorite-active .block-image {
@@ -28,6 +39,11 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+
+	&--basket {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
 	&:hover {
 		position: relative;
@@ -54,14 +70,23 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
+
+		&--basket {
+		}
 	}
 
 	&__info {
 		padding: 10px 15px;
-		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		flex-grow: 1;
+
+		&--basket {
+			flex-grow: 0;
+			width: 525px;
+			padding: 15px 10px;
+		}
 	}
 
 	&__category {
@@ -73,6 +98,13 @@
 		text-align: center;
 		transform: translateX(-50%);
 		white-space: nowrap;
+
+		&--basket {
+			font-size: 14px;
+			color: #707070;
+			white-space: nowrap;
+			margin-bottom: 5px;
+		}
 	}
 
 	&__name {
@@ -86,6 +118,13 @@
 		overflow: hidden;
 		max-height: 40px;
 		text-overflow: ellipsis;
+
+		&--basket {
+			font-size: 24px;
+			line-height: 30px;
+			margin-bottom: 5px;
+			max-height: 60px;
+		}
 	}
 
 	&__rating {
@@ -94,6 +133,16 @@
 		justify-content: center;
 		align-items: center;
 		gap: 3px;
+
+		&--basket {
+			justify-content: flex-start;
+			gap: 5px;
+		}
+
+		&-count {
+			@include font-base;
+			color: #707070;
+		}
 	}
 
 	&__btn {
@@ -108,6 +157,28 @@
 		border-radius: 10px;
 		border: none;
 		background-color: $brand;
+
+		&--basket {
+			width: 40px;
+			height: 40px;
+
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+
+		&--minus {
+			background-image: url('../../resources/img/minus.svg');
+		}
+
+		&--plus {
+			background-image: url('../../resources/img/plus.svg');
+		}
+	}
+
+	&__count,
+	&__price {
+		@include font-subtitle;
+		font-size: 24px;
 	}
 
 	&__currency {
@@ -125,5 +196,21 @@
 			transform: translateY(-50%);
 			background: url('../../resources/img/basket.svg') no-repeat center center;
 		}
+
+		&--basket {
+			@include font-currency;
+			font-size: 20px;
+		}
+	}
+
+	&__description {
+		@include font-base;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 5;
+		overflow: hidden;
+		max-height: 450px;
+		text-overflow: ellipsis;
+		margin-bottom: 10px;
 	}
 }
