@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const _apiBase = 'https://fakestoreap.com'
+const _apiBase = 'https://fakestoreapi.com'
 const _baseLimit = 9
 const _baseOffset = 0
 
@@ -27,14 +27,20 @@ export const getProducts = async (
 	searchQuery = '',
 	sortValue,
 	rangePrice,
-	selectedCategories,
+	selectedCategories
 ) => {
 	try {
 		const response = await axios.get(`${_apiBase}/products`)
 		const filteredData = response.data
-			.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase()))
+			.filter(product =>
+				product.title.toLowerCase().includes(searchQuery.toLowerCase())
+			)
 			.filter(product => product.price <= rangePrice)
-			.filter(product => selectedCategories.length === 0 || selectedCategories.includes(product.category.toLowerCase()))
+			.filter(
+				product =>
+					selectedCategories.length === 0 ||
+					selectedCategories.includes(product.category.toLowerCase())
+			)
 		return sortingData(filteredData, sortValue).slice(offset, limit)
 	} catch (error) {
 		console.log(error)
@@ -48,6 +54,61 @@ export const getAllCategories = async () => {
 		return response.data
 	} catch (error) {
 		console.log(error)
+		throw error
+	}
+}
+
+export const getProductsBasket = async userID => {
+	try {
+		const response = await axios.get(`${_apiBase}/carts/${userID}`)
+		const productsBasket = response.data.products
+		console.log('Корзина: ', productsBasket)
+		const endProductsBasket = await Promise.all(
+			productsBasket.map(async product => {
+				const productResponse = await axios.get(
+					`${_apiBase}/products/${product.productId}`
+				)
+
+				return {
+					...productResponse.data,
+					quantity: product.quantity,
+				}
+			})
+		)
+		console.log(endProductsBasket)
+		return endProductsBasket
+	} catch (error) {
+		console.log(error)
+		throw error
+	}
+}
+
+export const getCountProductsBasket = async userID => {
+	try {
+		const response = await axios.get(`${_apiBase}/carts/${userID}`)
+		const count = response.data.products.reduce((count, product) => {
+			return count + product.quantity
+		}, 0)
+		console.log(count)
+		return count
+	} catch (error) {
+		console.log(error)
+		throw error
+	}
+}
+
+export const updateBasket = async (userId, products) => {
+	try {
+		const response = await axios.put(`${_apiBase}/carts/${userId}`, {
+			userId: userId,
+			date: new Date().toISOString().slice(0, 10),
+			products: products,
+		})
+
+		console.log(response.data)
+		return response
+	} catch (error) {
+		console.error('Ошибка при обновлении корзины:', error)
 		throw error
 	}
 }

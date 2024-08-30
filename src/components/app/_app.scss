@@ -1,18 +1,1 @@
-@import '../../style/vars';
 
-main {
-	background-color: $background;
-	border-radius: 20px;
-	margin-top: -76px;
-	padding-top: 76px;
-	margin-bottom: -40px;
-	padding-bottom: 40px;
-
-	flex-grow: 1;
-}
-
-.main {
-	display: grid;
-	grid-template-columns: 320px 1fr;
-	height: 100%;
-}

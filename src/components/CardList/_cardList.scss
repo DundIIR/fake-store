@@ -3,6 +3,7 @@
 .card-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-template-rows: repeat(1, 405px);
 	gap: 40px;
 	padding: 40px;
 	background-color: white;
@@ -11,6 +12,7 @@
 
 	&--horizontal {
 		grid-template-columns: 1fr;
+		grid-template-rows: repeat(2, 295px);
 	}
 
 	&__load-more {

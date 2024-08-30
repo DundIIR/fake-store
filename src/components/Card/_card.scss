@@ -181,6 +181,10 @@
 		font-size: 24px;
 	}
 
+	&__price {
+		margin-left: auto;
+	}
+
 	&__currency {
 		@include font-currency;
 		position: relative;

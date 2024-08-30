@@ -5,13 +5,18 @@
 	margin-top: 13px;
 	padding: 3px 60px;
 	position: relative;
-	height: 219px;
+	height: 192px;
+	margin-bottom: 27px;
+
+	&--basket {
+		height: 148px;
+	}
 
 	&::after {
 		content: '';
 		position: absolute;
 		width: 1160px;
-		height: 192px;
+		height: calc(100%);
 		top: 27px;
 		left: 0;
 		background-color: $brand;
@@ -126,6 +131,7 @@
 		width: 21px;
 		height: 21px;
 		border-radius: 50%;
+		color: $text;
 		background-color: white;
 		font-size: 15px;
 		line-height: 16px;
