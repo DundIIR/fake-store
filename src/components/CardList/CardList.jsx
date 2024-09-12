@@ -2,42 +2,22 @@ import './_cardList.scss'
 import Card from '../Card/Card'
 import { useState, useEffect, useRef } from 'react'
 
-import {
-	getProducts,
-	getProductsBasket,
-	updateBasket,
-} from '../../services/fake-api-store'
+import { getProducts, getProductsBasket, updateBasket } from '../../services/fake-api-store'
 import CardListSkeleton from '../Skeleton/CardListSkeleton'
 import { ChakraProvider, useToast } from '@chakra-ui/react'
 
-const CardList = ({
-	layout,
-	products,
-	loading,
-	endProduct,
-	addLoadProducts,
-	updateBasket,
-}) => {
+const CardList = ({ layout, products, loading, endProduct, addLoadProducts, updateBasket }) => {
 	return (
-		<div
-			className={`card-list ${
-				layout === 'basket' ? 'card-list--horizontal' : ''
-			}`}
-		>
+		<div className={`card-list ${layout === 'basket' ? 'card-list--horizontal' : ''}`}>
 			{products.map(product => (
-				<Card
-					key={product.id}
-					product={product}
-					layout={layout}
-					updateBasket={updateBasket}
-				/>
+				<Card key={product.id} product={product} layout={layout} updateBasket={updateBasket} />
 			))}
 			{loading ? (
 				<CardListSkeleton layout={layout} />
 			) : (
 				<>
 					{!endProduct && (
-						<button className='card-list__load-more' onClick={addLoadProducts}>
+						<button className="card-list__load-more" onClick={addLoadProducts}>
 							Загрузить ещё
 						</button>
 					)}
@@ -47,13 +27,7 @@ const CardList = ({
 	)
 }
 
-const CardListCatalog = ({
-	searchQuery,
-	sortValue,
-	rangePrice,
-	selectedCategories,
-	...props
-}) => {
+const CardListCatalog = ({ searchQuery, sortValue, rangePrice, selectedCategories, userID, ...props }) => {
 	console.log('Это пропсы в каталоге:', props)
 
 	const [products, setProducts] = useState([]) // массив товаров
@@ -93,14 +67,14 @@ const CardListCatalog = ({
 			const limit = offsetRef.current + PRODUCTS_PER_PAGE
 			console.log(sortValue)
 			const newProducts = await getProducts(
+				userID,
 				limit,
 				offsetRef.current,
 				searchQuery,
 				sortValue,
 				rangePrice,
-				selectedCategories
+				selectedCategories,
 			)
-
 			if (newProducts.length < PRODUCTS_PER_PAGE) {
 				setEndProduct(true)
 			}
@@ -125,11 +99,7 @@ const CardListCatalog = ({
 		loadProducts()
 	}, [searchQuery, sortValue, rangePrice, selectedCategories])
 
-	return (
-		<CardList
-			{...{ ...props, products, loading, error, endProduct, addLoadProducts }}
-		></CardList>
-	)
+	return <CardList {...{ ...props, products, loading, error, endProduct, addLoadProducts }}></CardList>
 }
 
 const CardListBasket = ({ userID, ...props }) => {
@@ -164,9 +134,7 @@ const CardListBasket = ({ userID, ...props }) => {
 	}, [error])
 
 	const handleUpdateBasket = async updatedProduct => {
-		const updatedProducts = products.map(product =>
-			product.id === updatedProduct.id ? updatedProduct : product
-		)
+		const updatedProducts = products.map(product => (product.id === updatedProduct.id ? updatedProduct : product))
 		setProducts(updatedProducts)
 		try {
 			await updateBasket(userID, updatedProducts)
@@ -177,7 +145,6 @@ const CardListBasket = ({ userID, ...props }) => {
 				duration: 3000,
 				isClosable: true,
 			})
-			console.log('ghfgd')
 		} catch (err) {
 			setError(err)
 			console.log('Ошибка при добавлении товара: ', err)

@@ -22,25 +22,27 @@ const sortingData = (arr, sortValue) => {
 }
 
 export const getProducts = async (
+	userID,
 	limit = _baseLimit,
 	offset = _baseOffset,
 	searchQuery = '',
 	sortValue,
 	rangePrice,
-	selectedCategories
+	selectedCategories,
 ) => {
 	try {
 		const response = await axios.get(`${_apiBase}/products`)
+		const responseBasket = await axios.get(`${_apiBase}/carts/${userID}`)
+		const basketProductIds = responseBasket.data.products.map(product => product.productId)
+
 		const filteredData = response.data
-			.filter(product =>
-				product.title.toLowerCase().includes(searchQuery.toLowerCase())
-			)
+			.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase()))
 			.filter(product => product.price <= rangePrice)
-			.filter(
-				product =>
-					selectedCategories.length === 0 ||
-					selectedCategories.includes(product.category.toLowerCase())
-			)
+			.filter(product => selectedCategories.length === 0 || selectedCategories.includes(product.category.toLowerCase()))
+			.map(product => ({
+				...product,
+				basket: basketProductIds.includes(product.id),
+			}))
 		return sortingData(filteredData, sortValue).slice(offset, limit)
 	} catch (error) {
 		console.log(error)
@@ -65,18 +67,27 @@ export const getProductsBasket = async userID => {
 		console.log('Корзина: ', productsBasket)
 		const endProductsBasket = await Promise.all(
 			productsBasket.map(async product => {
-				const productResponse = await axios.get(
-					`${_apiBase}/products/${product.productId}`
-				)
+				const productResponse = await axios.get(`${_apiBase}/products/${product.productId}`)
 
 				return {
 					...productResponse.data,
 					quantity: product.quantity,
 				}
-			})
+			}),
 		)
 		console.log(endProductsBasket)
 		return endProductsBasket
+	} catch (error) {
+		console.log(error)
+		throw error
+	}
+}
+
+export const getBasket = async userID => {
+	try {
+		const response = await axios.get(`${_apiBase}/carts/${userID}`)
+
+		return response.data.products
 	} catch (error) {
 		console.log(error)
 		throw error

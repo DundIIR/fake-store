@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer'
 import { useState } from 'react'
 
 const Catalog = () => {
-	const USER_ID = 5
+	const USER_ID = 3
 
 	const [searchQuery, setSearchQuery] = useState('')
 	const [sortValue, setSortValue] = useState('popular')
@@ -30,15 +30,16 @@ const Catalog = () => {
 	return (
 		<>
 			<Header onSearch={handleSearch} onSort={handleSort} userID={USER_ID} />
-			<main className='main'>
-				<div className='container main--catalog'>
+			<main className="main">
+				<div className="container main--catalog">
 					<Filters onFilters={handleFilters} />
 					<CardListCatalog
-						className='card-list'
+						className="card-list"
 						searchQuery={searchQuery}
 						sortValue={sortValue}
 						rangePrice={rangePrice}
 						selectedCategories={selectedCategories}
+						userID={USER_ID}
 						layout={'catalog'}
 					/>
 				</div>

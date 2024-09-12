@@ -70,9 +70,6 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
-
-		&--basket {
-		}
 	}
 
 	&__info {
@@ -114,6 +111,7 @@
 		margin-bottom: 10px;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
+		line-clamp: 2;
 		-webkit-line-clamp: 2;
 		overflow: hidden;
 		max-height: 40px;
@@ -158,6 +156,10 @@
 		border: none;
 		background-color: $brand;
 
+		&--inBasket {
+			background-color: #ededed;
+		}
+
 		&--basket {
 			width: 40px;
 			height: 40px;
@@ -201,6 +203,12 @@
 			background: url('../../resources/img/basket.svg') no-repeat center center;
 		}
 
+		&--inBasket::after {
+			width: 22px;
+			height: 17px;
+			background: url('../../resources/img/car.svg') no-repeat center center;
+		}
+
 		&--basket {
 			@include font-currency;
 			font-size: 20px;
@@ -211,6 +219,7 @@
 		@include font-base;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
+		line-clamp: 5;
 		-webkit-line-clamp: 5;
 		overflow: hidden;
 		max-height: 450px;
